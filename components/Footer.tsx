@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "motion/react";
 import { Phone, MapPin, ArrowUp } from "lucide-react";
 
 export default function Footer() {
@@ -11,7 +12,13 @@ export default function Footer() {
   return (
     <footer className="bg-brand-darker text-gray-400 border-t border-white/10 py-16">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10 items-start">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10 items-start"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        >
           {/* Brand Info */}
           <div className="md:col-span-5">
             <div className="flex items-center gap-3.5 mb-4">
@@ -41,16 +48,27 @@ export default function Footer() {
           {/* Quick Links */}
           <div className="md:col-span-3 text-[11px] uppercase tracking-[0.18em] space-y-3">
             <span className="text-brand-gold font-semibold block mb-4">Navegação</span>
-            <div><a href="#projeto" className="hover:text-white transition-colors">O Projeto</a></div>
-            <div><a href="#showroom" className="hover:text-white transition-colors">Showroom</a></div>
-            <div><a href="#plantas" className="hover:text-white transition-colors">Plantas Técnicas</a></div>
-            <div><a href="#materiais" className="hover:text-white transition-colors">Arquitetura</a></div>
-            <div><a href="#localizacao" className="hover:text-white transition-colors">Localização</a></div>
-            <div><a href="#contato" className="hover:text-white transition-colors">Contato</a></div>
+            {[
+              { href: "#projeto", label: "O Projeto" },
+              { href: "#showroom", label: "Showroom" },
+              { href: "#plantas", label: "Plantas Técnicas" },
+              { href: "#materiais", label: "Arquitetura" },
+              { href: "#localizacao", label: "Localização" },
+              { href: "#contato", label: "Contato" },
+            ].map(({ href, label }) => (
+              <div key={href}>
+                <a href={href} className="hover:text-white transition-colors">
+                  {label}
+                </a>
+              </div>
+            ))}
           </div>
 
           {/* Agent Contact Box */}
-          <div className="md:col-span-4 bg-brand-dark p-6 border border-white/10 rounded-sm">
+          <motion.div
+            className="md:col-span-4 bg-brand-dark p-6 border border-white/10 rounded-sm"
+            whileHover={{ borderColor: "rgba(255,179,0,0.4)", transition: { duration: 0.3 } }}
+          >
             <span className="text-[9px] uppercase tracking-[0.2em] text-brand-gold font-semibold block mb-1">
               Corretor Responsável
             </span>
@@ -65,21 +83,24 @@ export default function Footer() {
                 <span>São Francisco — Niterói / RJ</span>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-light">
           <span>
             © {new Date().getFullYear()} Projeto São Francisco · Pinciara Imóveis Exclusivos.
           </span>
-          <button
+          <motion.button
             onClick={scrollToTop}
             className="flex items-center gap-2 text-brand-gold hover:text-white transition-colors uppercase tracking-widest font-medium text-[11px]"
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
           >
             <span>Voltar ao topo</span>
             <ArrowUp className="w-3.5 h-3.5" />
-          </button>
+          </motion.button>
         </div>
       </div>
     </footer>

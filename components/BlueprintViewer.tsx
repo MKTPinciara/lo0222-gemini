@@ -2,8 +2,32 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ZoomIn, Maximize2, FileText, Check } from "lucide-react";
+import { motion } from "motion/react";
+import { ZoomIn, FileText, Check } from "lucide-react";
 import LightboxModal from "./LightboxModal";
+
+const dataRows = [
+  { label: "Área Térrea (Loja)", value: "147,87 m²", highlight: false },
+  { label: "Mezanino Elevado", value: "77,92 m²", highlight: false },
+  { label: "Área Total Construída", value: "225,79 m²", highlight: true },
+  { label: "Penínsul / Esquina", value: "Sim (Esquina Dupla)", highlight: false },
+  { label: "Endereço", value: "São Francisco — Niterói/RJ", highlight: false },
+];
+
+const checkItems = [
+  "Quadro de esquadrias em alumínio preto",
+  "Brises metálicos modulares",
+  "Acesso facilitado para clientes",
+];
+
+const sectionVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: "easeOut" as const },
+  },
+};
 
 export default function BlueprintViewer() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -21,9 +45,15 @@ export default function BlueprintViewer() {
       <section id="plantas" className="py-24 md:py-36 bg-brand-sand text-brand-dark">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           {/* Section Header */}
-          <div className="max-w-3xl mb-16">
+          <motion.div
+            className="max-w-3xl mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
+            variants={sectionVariants}
+          >
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold block mb-3">
-              Engenharia & Arquitetura
+              Engenharia &amp; Arquitetura
             </span>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.05] mb-6">
               O espaço, por dentro.
@@ -31,12 +61,18 @@ export default function BlueprintViewer() {
             <p className="text-lg text-brand-muted font-light leading-relaxed">
               Uma planta simples, objetiva e inteligente que organiza a experiência em dois níveis integrados, equilibrando área de exposição térrea e privacidade no mezanino.
             </p>
-          </div>
+          </motion.div>
 
           {/* Blueprint Layout Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            {/* Blueprint Technical Drawing Container */}
-            <div className="lg:col-span-8 bg-brand-cream border border-brand-dark/15 p-4 md:p-6 rounded-sm shadow-xl relative group">
+            {/* Blueprint Technical Drawing */}
+            <motion.div
+              className="lg:col-span-8 bg-brand-cream border border-brand-dark/15 p-4 md:p-6 rounded-sm shadow-xl relative group"
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            >
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm bg-white border border-brand-dark/10">
                 <Image
                   src="/assets/prancha/prancha-01.png"
@@ -52,8 +88,7 @@ export default function BlueprintViewer() {
                 />
               </div>
 
-              {/* Hover Action Overlay */}
-              <button
+              <motion.button
                 onClick={() =>
                   handleOpenLightbox(
                     "/assets/prancha/prancha-01.png",
@@ -61,14 +96,22 @@ export default function BlueprintViewer() {
                   )
                 }
                 className="mt-4 flex items-center justify-center gap-2 w-full py-3 bg-brand-dark text-white hover:bg-brand-gold hover:text-brand-dark text-xs font-bold uppercase tracking-widest rounded-sm transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <ZoomIn className="w-4 h-4" />
                 <span>Ampliar Prancha Técnica em Alta Resolução</span>
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
 
-            {/* Sidebar Details & Data Table */}
-            <div className="lg:col-span-4 bg-brand-cream border border-brand-dark/15 p-8 rounded-sm">
+            {/* Sidebar Details */}
+            <motion.div
+              className="lg:col-span-4 bg-brand-cream border border-brand-dark/15 p-8 rounded-sm"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            >
               <h3 className="text-2xl font-light tracking-tight mb-6 pb-4 border-b border-brand-dark/15 flex items-center gap-2">
                 <FileText className="w-5 h-5 text-brand-gold" />
                 Leitura Técnica
@@ -76,48 +119,40 @@ export default function BlueprintViewer() {
 
               {/* Data Table Rows */}
               <div className="space-y-4 text-sm mb-8">
-                <div className="flex justify-between items-center py-2.5 border-b border-brand-dark/10">
-                  <span className="text-brand-muted">Área Térrea (Loja)</span>
-                  <strong className="font-semibold text-base">147,87 m²</strong>
-                </div>
-
-                <div className="flex justify-between items-center py-2.5 border-b border-brand-dark/10">
-                  <span className="text-brand-muted">Mezanino Elevado</span>
-                  <strong className="font-semibold text-base">77,92 m²</strong>
-                </div>
-
-                <div className="flex justify-between items-center py-2.5 border-b border-brand-dark/10">
-                  <span className="text-brand-muted">Área Total Construída</span>
-                  <strong className="font-semibold text-base text-brand-gold">225,79 m²</strong>
-                </div>
-
-                <div className="flex justify-between items-center py-2.5 border-b border-brand-dark/10">
-                  <span className="text-brand-muted">Península / Esquina</span>
-                  <strong className="font-semibold">Sim (Esquina Dupla)</strong>
-                </div>
-
-                <div className="flex justify-between items-center py-2.5 border-b border-brand-dark/10">
-                  <span className="text-brand-muted">Endereço</span>
-                  <strong className="font-semibold text-right">São Francisco — Niterói/RJ</strong>
-                </div>
+                {dataRows.map(({ label, value, highlight }, i) => (
+                  <motion.div
+                    key={label}
+                    className="flex justify-between items-center py-2.5 border-b border-brand-dark/10"
+                    initial={{ opacity: 0, x: 10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 + 0.3, duration: 0.5 }}
+                  >
+                    <span className="text-brand-muted">{label}</span>
+                    <strong className={`font-semibold text-base${highlight ? " text-brand-gold" : ""}`}>
+                      {value}
+                    </strong>
+                  </motion.div>
+                ))}
               </div>
 
               {/* Highlights List */}
               <div className="space-y-3 mb-8">
-                <div className="flex items-center gap-2 text-xs text-brand-dark">
-                  <Check className="w-4 h-4 text-brand-gold shrink-0" />
-                  <span>Quadro de esquadrias em alumínio preto</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-brand-dark">
-                  <Check className="w-4 h-4 text-brand-gold shrink-0" />
-                  <span>Brises metálicos modulares</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-brand-dark">
-                  <Check className="w-4 h-4 text-brand-gold shrink-0" />
-                  <span>Acesso facilitado para clientes</span>
-                </div>
+                {checkItems.map((item, i) => (
+                  <motion.div
+                    key={item}
+                    className="flex items-center gap-2 text-xs text-brand-dark"
+                    initial={{ opacity: 0, x: 10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 + 0.5, duration: 0.5 }}
+                  >
+                    <Check className="w-4 h-4 text-brand-gold shrink-0" />
+                    <span>{item}</span>
+                  </motion.div>
+                ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

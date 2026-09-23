@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-gold: #FFB300;
+    --brand-dark: #141513;
+    --brand-paper: #EAEAEB;
+    --brand-sand: #E5DCCC;
+    --brand-straw: #DFD4BC;
+    --brand-sandal: #BBA87E;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--brand-paper);
+    color: #1b1b19;
+  }
+
+  body {
+    overflow-x: hidden;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  }
+
+  ::selection {
+    background-color: var(--brand-gold);
+    color: #141513;
+  }
+}
+
+/* Custom animations & smooth transitions */
+.gsap-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: transform, opacity;
+}
+
+.gsap-reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  will-change: transform, opacity;
+}
+
+.gsap-reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  will-change: transform, opacity;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #141513;
+}
+::-webkit-scrollbar-thumb {
+  background: #FFB300;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e5a100;
+}

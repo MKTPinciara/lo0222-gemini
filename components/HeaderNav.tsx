@@ -6,8 +6,9 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ArrowRight } from "lucide-react";
 
 const navLinks = [
-  { href: "#renders", label: "Fotos 3D" },
-  { href: "#plantas", label: "Plantas" },
+  { href: "#perspectivas", label: "Arquitetura & 3D" },
+  { href: "#plantas", label: "Plantas Técnicas" },
+  { href: "#metricas", label: "Especificações" },
   { href: "#localizacao", label: "Localização" },
 ];
 
@@ -17,7 +18,7 @@ export default function HeaderNav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -25,50 +26,41 @@ export default function HeaderNav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-brand-dark/95 backdrop-blur-md py-4 border-b border-white/10 text-white"
-          : "bg-gradient-to-b from-brand-dark/80 to-transparent py-6 text-white"
+          ? "bg-[#121212]/95 backdrop-blur-md border-b border-white/[0.08] shadow-lg"
+          : "bg-[#121212]/75 backdrop-blur-sm border-b border-white/[0.05]"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
-        {/* Brand Logo & Title with the new official monogram */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-10 h-16 sm:h-20 flex items-center justify-between">
+        {/* Real Brand Logo */}
         <motion.a
-          href="#inicio"
-          className="flex items-center gap-3 group"
-          initial={{ opacity: 0, x: -20 }}
+          href="#hero"
+          className="flex items-center group"
+          initial={{ opacity: 0, x: -16 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <div className="relative w-8 h-8 flex items-center justify-center shrink-0">
-            <Image
-              src="/assets/brand/simbolo.svg"
-              alt="Pinciara Imóveis Exclusivos"
-              width={32}
-              height={32}
-              className="w-7 h-7 object-contain"
-            />
-          </div>
-          <div className="flex flex-col border-l border-white/20 pl-3">
-            <span className="text-xs uppercase tracking-[0.22em] font-bold text-white group-hover:text-brand-gold transition-colors">
-              PINCIARA
-            </span>
-            <span className="text-[9px] uppercase tracking-[0.16em] text-brand-gold font-normal">
-              São Francisco · Niterói
-            </span>
-          </div>
+          <Image
+            src="/assets/brand/logo-pinciara.png"
+            alt="Pinciara Imóveis Exclusivos"
+            width={180}
+            height={44}
+            priority
+            className="h-7 sm:h-9 w-auto object-contain transition-opacity group-hover:opacity-90"
+          />
         </motion.a>
 
-        {/* Clean Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-[11px] uppercase tracking-[0.18em] font-medium text-gray-300">
-          {navLinks.map(({ href, label }, i) => (
+        {/* Desktop Navigation Links */}
+        <nav className="hidden md:flex items-center space-x-8 lg:space-x-10 text-[11px] uppercase tracking-[0.18em] font-medium text-neutral-300">
+          {navLinks.map(({ href, label }, idx) => (
             <motion.a
               key={href}
               href={href}
-              className="hover:text-white transition-colors relative py-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[1px] after:bg-brand-gold hover:after:w-full after:transition-all"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * i + 0.2, duration: 0.5 }}
+              transition={{ duration: 0.4, delay: 0.1 + idx * 0.06 }}
+              className="relative py-1 hover:text-champagne transition-colors duration-200 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-champagne hover:after:w-full after:transition-all after:duration-300"
             >
               {label}
             </motion.a>
@@ -77,89 +69,67 @@ export default function HeaderNav() {
 
         {/* Action Button */}
         <motion.div
-          className="hidden md:flex items-center"
-          initial={{ opacity: 0, x: 20 }}
+          className="hidden sm:flex items-center gap-4"
+          initial={{ opacity: 0, x: 16 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
         >
           <motion.a
             href="#contato"
-            className="inline-flex items-center gap-2 border border-brand-gold/60 text-brand-gold hover:bg-brand-gold hover:text-brand-dark px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-all duration-300 rounded-sm"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-[10px] lg:text-[11px] font-semibold tracking-[0.18em] uppercase bg-champagne text-neutral-950 hover:bg-champagne-light transition-colors duration-300 shadow-sm"
           >
-            <span>Contato</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <span>Agendar Visita</span>
+            <ArrowRight className="w-3 h-3" />
           </motion.a>
         </motion.div>
 
         {/* Mobile Hamburger Toggle */}
-        <motion.button
+        <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-white hover:text-brand-gold p-2 transition-colors"
+          className="md:hidden text-white hover:text-champagne p-2 -mr-2 transition-colors"
           aria-label="Abrir menu"
-          whileTap={{ scale: 0.9 }}
         >
-          <AnimatePresence mode="wait" initial={false}>
-            {mobileMenuOpen ? (
-              <motion.span
-                key="close"
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <X className="w-5 h-5" />
-              </motion.span>
-            ) : (
-              <motion.span
-                key="open"
-                initial={{ rotate: 90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: -90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Menu className="w-5 h-5" />
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </motion.button>
+          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
+            className="md:hidden bg-[#141414]/98 backdrop-blur-xl border-b border-white/[0.08] px-5 py-5 overflow-hidden"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden bg-brand-dark/98 border-b border-white/10 overflow-hidden"
+            transition={{ duration: 0.28, ease: "easeInOut" }}
           >
-            <div className="px-6 py-8 flex flex-col gap-5 text-xs uppercase tracking-widest text-gray-200">
-              {navLinks.map(({ href, label }, i) => (
+            <div className="flex flex-col space-y-2">
+              {navLinks.map(({ href, label }, idx) => (
                 <motion.a
                   key={href}
                   href={href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="hover:text-brand-gold py-2 border-b border-white/5"
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05, duration: 0.3 }}
+                  transition={{ delay: idx * 0.05 }}
+                  className="text-[11px] uppercase tracking-[0.18em] text-neutral-300 hover:text-champagne py-2.5 border-b border-white/[0.05] flex items-center justify-between"
                 >
-                  {label}
+                  <span>{label}</span>
+                  <ArrowRight className="w-3 h-3 text-champagne/60" />
                 </motion.a>
               ))}
               <motion.a
                 href="#contato"
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-2 text-center bg-brand-gold text-brand-dark py-3 font-semibold text-xs uppercase tracking-widest rounded-sm"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.3 }}
-                whileTap={{ scale: 0.97 }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center justify-center gap-2 w-full py-3 bg-champagne text-neutral-950 text-[11px] font-semibold uppercase tracking-[0.18em] mt-3 shadow-md"
               >
-                Falar com Atendimento
+                <span>Agendar Visita</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </motion.a>
             </div>
           </motion.div>

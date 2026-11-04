@@ -34,3 +34,6 @@ next-env.d.ts
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Design references
+stitch-design/

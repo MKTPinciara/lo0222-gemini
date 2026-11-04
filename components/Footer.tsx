@@ -10,88 +10,103 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-brand-darker text-gray-400 border-t border-white/10 py-16">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <footer className="bg-[#111111] border-t border-white/[0.08] py-12 sm:py-16">
+      <div className="max-w-7xl mx-auto px-5 sm:px-10">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10 items-start"
-          initial={{ opacity: 0, y: 30 }}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 pb-10 sm:pb-12 border-b border-white/[0.08]"
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
-          {/* Brand Info */}
-          <div className="md:col-span-5">
+          {/* Footer Column 1: Real Brand Logo & Info (2 Cols) */}
+          <div className="sm:col-span-2">
             <div className="mb-4">
               <Image
-                src="/assets/brand/logo.svg"
+                src="/assets/brand/logo-pinciara.png"
                 alt="Pinciara Imóveis Exclusivos"
-                width={200}
-                height={50}
-                className="h-9 w-auto object-contain"
+                width={170}
+                height={42}
+                className="h-8 sm:h-9 w-auto object-contain"
               />
             </div>
-            <p className="text-xs font-light text-gray-400 max-w-md leading-relaxed mb-3">
-              Ponto comercial de alto padrão na esquina nobre de São Francisco (Rua Guaianazes, 46). Vão livre térreo de pé-direito duplo e mezanino integrado (~225,8 m²).
+            <p className="text-xs text-neutral-400 max-w-sm leading-relaxed mb-3.5 font-light">
+              Ponto comercial de alto padrão no novo Polo de Design do Canal de São Francisco (Rua Guaianazes, 46). Vão livre térreo de pé-direito duplo e mezanino integrado (~225,8 m²).
             </p>
-            <span className="text-[10px] uppercase tracking-widest text-brand-gold font-medium">
+            <span className="text-[10px] tracking-wider uppercase font-medium text-champagne">
               CRECI: CJ 7119
             </span>
           </div>
 
-          {/* Quick Links */}
-          <div className="md:col-span-3 text-[11px] uppercase tracking-[0.18em] space-y-3">
-            <span className="text-brand-gold font-semibold block mb-4">Navegação</span>
-            {[
-              { href: "#renders", label: "Fotos 3D" },
-              { href: "#plantas", label: "Plantas Técnicas" },
-              { href: "#localizacao", label: "Localização" },
-              { href: "#contato", label: "Contato" },
-            ].map(({ href, label }) => (
-              <div key={href}>
-                <a href={href} className="hover:text-white transition-colors">
-                  {label}
+          {/* Footer Column 2: Navigation Links */}
+          <div>
+            <h4 className="text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.2em] text-white mb-3.5">
+              Navegação
+            </h4>
+            <ul className="space-y-2 text-xs text-neutral-400 font-light">
+              <li>
+                <a className="hover:text-champagne transition" href="#perspectivas">
+                  Perspectivas 3D
                 </a>
-              </div>
-            ))}
+              </li>
+              <li>
+                <a className="hover:text-champagne transition" href="#plantas">
+                  Plantas Técnicas
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-champagne transition" href="#metricas">
+                  Especificações &amp; Áreas
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-champagne transition" href="#localizacao">
+                  Localização Estratégica
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-champagne transition" href="#contato">
+                  Agendamento de Visita
+                </a>
+              </li>
+            </ul>
           </div>
 
-          {/* Agent Contact Box */}
-          <motion.div
-            className="md:col-span-4 bg-brand-dark p-6 border border-white/10 rounded-sm"
-            whileHover={{ borderColor: "rgba(255,179,0,0.4)", transition: { duration: 0.3 } }}
-          >
-            <span className="text-[9px] uppercase tracking-[0.2em] text-brand-gold font-semibold block mb-1">
-              Corretor Responsável
-            </span>
-            <h4 className="text-base font-semibold text-white mb-2">Luiz Pinciara</h4>
-            <div className="space-y-1.5 text-xs font-light">
-              <div className="flex items-center gap-2 text-gray-300">
-                <Phone className="w-3.5 h-3.5 text-brand-gold shrink-0" />
+          {/* Footer Column 3: Contact & Direct Line */}
+          <div>
+            <h4 className="text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.2em] text-white mb-3.5">
+              Atendimento
+            </h4>
+            <div className="text-xs text-neutral-400 space-y-2 font-light">
+              <p className="text-white font-normal">Luiz Pinciara</p>
+              <p className="flex items-center gap-2">
+                <Phone className="w-3.5 h-3.5 text-champagne shrink-0" />
                 <span>(21) 99522-1369</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-300">
-                <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0" />
-                <span>Guaianazes, 46 — São Francisco / Niterói</span>
-              </div>
+              </p>
+              <p className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5 text-champagne shrink-0" />
+                <span>São Francisco / Niterói, RJ</span>
+              </p>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-light">
-          <span>
-            © {new Date().getFullYear()} Projeto São Francisco · Pinciara Imóveis Exclusivos.
-          </span>
-          <motion.button
-            onClick={scrollToTop}
-            className="flex items-center gap-2 text-brand-gold hover:text-white transition-colors uppercase tracking-widest font-medium text-[11px]"
-            whileHover={{ y: -3 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-          >
-            <span>Voltar ao topo</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </motion.button>
+        {/* Bottom Credits and Back to Top */}
+        <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] sm:text-xs text-neutral-400 font-light text-center sm:text-left">
+          <div>
+            © {new Date().getFullYear()} Projeto São Francisco — Pinciara Imóveis Exclusivos. Todos os direitos reservados.
+          </div>
+          <div>
+            <motion.button
+              onClick={scrollToTop}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              className="hover:text-champagne transition inline-flex items-center gap-2 uppercase tracking-[0.16em] text-[10px] font-medium cursor-pointer"
+            >
+              <span>Voltar ao Topo</span>
+              <ArrowUp className="w-3 h-3" />
+            </motion.button>
+          </div>
         </div>
       </div>
     </footer>

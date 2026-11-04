@@ -332,7 +332,7 @@ export default function ThumbnailCarousel({
               className={`absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center shadow-2xl transition-all z-20 ${
                 index === 0
                   ? "opacity-20 cursor-not-allowed bg-black/40 text-gray-500"
-                  : "bg-white/90 text-brand-dark hover:bg-brand-gold hover:text-brand-dark hover:scale-105 opacity-90 backdrop-blur-sm"
+                  : "bg-black/80 text-white hover:bg-brand-gold hover:text-brand-dark hover:scale-105 border border-white/20 opacity-90 backdrop-blur-sm"
               }`}
               aria-label="Imagem anterior"
               whileTap={{ scale: 0.95 }}
@@ -348,7 +348,7 @@ export default function ThumbnailCarousel({
               className={`absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center shadow-2xl transition-all z-20 ${
                 index === items.length - 1
                   ? "opacity-20 cursor-not-allowed bg-black/40 text-gray-500"
-                  : "bg-white/90 text-brand-dark hover:bg-brand-gold hover:text-brand-dark hover:scale-105 opacity-90 backdrop-blur-sm"
+                  : "bg-black/80 text-white hover:bg-brand-gold hover:text-brand-dark hover:scale-105 border border-white/20 opacity-90 backdrop-blur-sm"
               }`}
               aria-label="Próxima imagem"
               whileTap={{ scale: 0.95 }}
@@ -375,9 +375,9 @@ export default function ThumbnailCarousel({
           </div>
 
           {/* Animated Thumbnails Strip */}
-          <div className="bg-white border border-brand-dark/10 p-2 sm:p-3 rounded-sm shadow-md">
-            <div className="flex items-center justify-between px-1 mb-1 text-[11px] text-brand-muted">
-              <span className="font-medium text-brand-dark uppercase tracking-widest text-[10px]">
+          <div className="bg-black border border-white/10 p-2 sm:p-3 rounded-sm shadow-xl">
+            <div className="flex items-center justify-between px-1 mb-1 text-[11px] text-gray-400">
+              <span className="font-medium text-white uppercase tracking-widest text-[10px]">
                 Miniaturas Interativas
               </span>
               <span>Arraste ou clique para selecionar</span>

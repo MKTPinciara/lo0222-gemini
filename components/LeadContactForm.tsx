@@ -3,19 +3,18 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
-import { Phone, Send, CheckCircle2 } from "lucide-react";
+import { Phone, Send, CheckCircle2, User, Mail, MapPin } from "lucide-react";
 
 export default function LeadContactForm() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [mensagem, setMensagem] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formattedText = `Olá, Luiz Pinciara! Tenho interesse no imóvel comercial do Projeto São Francisco.\n\n*Nome:* ${nome}\n*E-mail:* ${email}\n*Telefone:* ${telefone}\n*Mensagem:* ${mensagem || "Gostaria de agendar uma visita e receber mais informações."}`;
+    const formattedText = `Olá, Luiz Pinciara! Tenho interesse no imóvel comercial do Projeto São Francisco (Rua Guaianazes, 46).\n\n*Nome:* ${nome}\n*E-mail:* ${email}\n*Telefone:* ${telefone}\n\nGostaria de agendar uma visita e receber mais informações.`;
 
     const encodedText = encodeURIComponent(formattedText);
     const whatsappLink = `https://wa.me/5521995221369?text=${encodedText}`;
@@ -27,7 +26,7 @@ export default function LeadContactForm() {
   };
 
   const inputClass =
-    "w-full bg-brand-darker border border-white/15 focus:border-brand-gold rounded-sm px-4 py-3 text-sm text-white placeholder-gray-500 outline-none transition-colors";
+    "w-full bg-brand-darker border border-white/15 focus:border-brand-gold focus:bg-black/40 rounded-sm px-4 py-3.5 text-sm text-white placeholder-gray-500 outline-none transition-all";
 
   return (
     <section id="contato" className="py-24 md:py-36 bg-brand-darker text-white relative overflow-hidden">
@@ -44,23 +43,23 @@ export default function LeadContactForm() {
           >
             <div>
               <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-gold block mb-3">
-                Atendimento Comercial
+                Atendimento Comercial Exclusivo
               </span>
-              <h2 className="text-3xl sm:text-5xl font-light tracking-tight leading-[1.05] mb-6">
-                Fale com a equipe responsável.
+              <h2 className="text-3xl sm:text-5xl font-light tracking-tight leading-[1.05] text-white mb-6">
+                Fale com a equipe <span className="font-normal text-brand-gold italic font-serif">responsável.</span>
               </h2>
               <p className="text-gray-300 text-sm md:text-base font-light leading-relaxed mb-8">
-                Preencha os dados no formulário ao lado para falar com o corretor responsável pelo Projeto São Francisco.
+                Preencha seus dados para falar diretamente com o corretor responsável pelo Projeto São Francisco e agendar uma visita ao espaço comercial.
               </p>
 
               {/* Agent Card */}
               <motion.div
-                className="bg-brand-dark/80 border border-white/10 p-6 rounded-sm mb-6 flex items-center gap-5"
-                whileHover={{ borderColor: "rgba(255,179,0,0.35)", transition: { duration: 0.3 } }}
+                className="bg-brand-dark border border-white/10 p-6 rounded-sm mb-6 flex items-center gap-5 shadow-xl"
+                whileHover={{ borderColor: "rgba(255,179,0,0.5)", transition: { duration: 0.3 } }}
               >
-                <div className="relative w-14 h-14 rounded-full border border-brand-gold flex items-center justify-center bg-brand-gold/10 shrink-0">
+                <div className="relative w-14 h-14 rounded-full border border-brand-gold/50 flex items-center justify-center bg-brand-gold/10 shrink-0">
                   <Image
-                    src="/assets/brand/logo.svg"
+                    src="/assets/brand/simbolo.svg"
                     alt="Pinciara Imóveis Exclusivos"
                     width={32}
                     height={32}
@@ -72,16 +71,20 @@ export default function LeadContactForm() {
                     Corretor de Imóveis
                   </span>
                   <h3 className="text-lg font-semibold text-white">Luiz Pinciara</h3>
-                  <span className="text-xs text-gray-400 font-light flex items-center gap-1.5 mt-0.5">
+                  <span className="text-xs text-gray-300 font-light flex items-center gap-1.5 mt-0.5">
                     <Phone className="w-3.5 h-3.5 text-brand-gold" />
                     (21) 99522-1369
+                  </span>
+                  <span className="text-[11px] text-gray-400 font-light flex items-center gap-1.5 mt-0.5">
+                    <MapPin className="w-3 h-3 text-brand-gold" />
+                    Guaianazes, 46 — São Francisco / Niterói
                   </span>
                 </div>
               </motion.div>
             </div>
           </motion.div>
 
-          {/* Right Column: Clean Minimalist Form */}
+          {/* Right Column: Clean Form */}
           <motion.div
             className="lg:col-span-7 bg-brand-dark border border-white/10 p-8 md:p-12 rounded-sm shadow-2xl"
             initial={{ opacity: 0, x: 40 }}
@@ -93,7 +96,7 @@ export default function LeadContactForm() {
               Formulário de Contato
             </h3>
             <p className="text-gray-400 text-xs font-light mb-8">
-              Ao enviar, você será direcionado para o WhatsApp de Luiz Pinciara.
+              Ao enviar, você será direcionado para o WhatsApp de Luiz Pinciara com os dados preenchidos.
             </p>
 
             <AnimatePresence mode="wait">
@@ -111,19 +114,19 @@ export default function LeadContactForm() {
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{ type: "spring", stiffness: 300, damping: 18, delay: 0.1 }}
                   >
-                    <CheckCircle2 className="w-10 h-10 mx-auto mb-3 text-brand-gold" />
+                    <CheckCircle2 className="w-12 h-12 mx-auto mb-3 text-brand-gold" />
                   </motion.div>
-                  <h4 className="text-lg font-semibold mb-2 text-white">Mensagem Enviada!</h4>
+                  <h4 className="text-xl font-semibold mb-2 text-white">Solicitação Iniciada!</h4>
                   <p className="text-xs text-gray-300 font-light mb-6">
                     Redirecionando para a conversa no WhatsApp com <strong>Luiz Pinciara</strong>.
                   </p>
                   <motion.a
                     href={`https://wa.me/5521995221369?text=${encodeURIComponent(
-                      `Olá, Luiz Pinciara! Tenho interesse no imóvel comercial do Projeto São Francisco.\n*Nome:* ${nome}`
+                      `Olá, Luiz Pinciara! Tenho interesse no imóvel comercial do Projeto São Francisco (Rua Guaianazes, 46).\n*Nome:* ${nome}`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 border border-brand-gold bg-brand-gold text-brand-dark px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-sm hover:bg-amber-400 transition-colors"
+                    className="inline-flex items-center gap-2 border border-brand-gold bg-brand-gold text-brand-dark px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-sm hover:bg-amber-400 transition-colors shadow-md"
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.97 }}
                   >
@@ -141,25 +144,28 @@ export default function LeadContactForm() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {/* Name & Phone Row */}
+                  {/* Name Field */}
+                  <div>
+                    <label htmlFor="nome" className="block text-[10px] uppercase tracking-widest text-gray-300 font-semibold mb-2 flex items-center gap-1.5">
+                      <User className="w-3.5 h-3.5 text-brand-gold" />
+                      Nome Completo *
+                    </label>
+                    <input
+                      id="nome"
+                      type="text"
+                      required
+                      value={nome}
+                      onChange={(e) => setNome(e.target.value)}
+                      placeholder="Seu nome completo"
+                      className={inputClass}
+                    />
+                  </div>
+
+                  {/* Phone & Email Row */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="nome" className="block text-[10px] uppercase tracking-widest text-gray-300 mb-2">
-                        Nome Completo *
-                      </label>
-                      <input
-                        id="nome"
-                        type="text"
-                        required
-                        value={nome}
-                        onChange={(e) => setNome(e.target.value)}
-                        placeholder="Seu nome"
-                        className={inputClass}
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="telefone" className="block text-[10px] uppercase tracking-widest text-gray-300 mb-2">
+                      <label htmlFor="telefone" className="block text-[10px] uppercase tracking-widest text-gray-300 font-semibold mb-2 flex items-center gap-1.5">
+                        <Phone className="w-3.5 h-3.5 text-brand-gold" />
                         Telefone / WhatsApp *
                       </label>
                       <input
@@ -172,49 +178,34 @@ export default function LeadContactForm() {
                         className={inputClass}
                       />
                     </div>
-                  </div>
 
-                  {/* Email Field */}
-                  <div>
-                    <label htmlFor="email" className="block text-[10px] uppercase tracking-widest text-gray-300 mb-2">
-                      E-mail Comercial *
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="seuemail@exemplo.com.br"
-                      className={inputClass}
-                    />
-                  </div>
-
-                  {/* Message Field */}
-                  <div>
-                    <label htmlFor="mensagem" className="block text-[10px] uppercase tracking-widest text-gray-300 mb-2">
-                      Mensagem (opcional)
-                    </label>
-                    <textarea
-                      id="mensagem"
-                      rows={3}
-                      value={mensagem}
-                      onChange={(e) => setMensagem(e.target.value)}
-                      placeholder="Escreva sua mensagem ou dúvida sobre o imóvel..."
-                      className={`${inputClass} resize-none`}
-                    />
+                    <div>
+                      <label htmlFor="email" className="block text-[10px] uppercase tracking-widest text-gray-300 font-semibold mb-2 flex items-center gap-1.5">
+                        <Mail className="w-3.5 h-3.5 text-brand-gold" />
+                        E-mail Comercial *
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="seuemail@exemplo.com.br"
+                        className={inputClass}
+                      />
+                    </div>
                   </div>
 
                   {/* Submit Button */}
                   <motion.button
                     type="submit"
-                    className="w-full border border-brand-gold bg-brand-gold hover:bg-amber-400 text-brand-dark py-4 text-xs font-bold uppercase tracking-[0.18em] transition-all rounded-sm shadow-xl flex items-center justify-center gap-2"
+                    className="w-full border border-brand-gold bg-brand-gold hover:bg-amber-400 text-brand-dark py-4 text-xs font-bold uppercase tracking-[0.18em] transition-all rounded-sm shadow-xl flex items-center justify-center gap-2 cursor-pointer mt-4"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   >
                     <Send className="w-4 h-4" />
-                    <span>Enviar Mensagem via WhatsApp</span>
+                    <span>Enviar e Iniciar Conversa no WhatsApp</span>
                   </motion.button>
                 </motion.form>
               )}

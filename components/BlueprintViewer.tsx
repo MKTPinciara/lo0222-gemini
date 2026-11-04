@@ -10,14 +10,15 @@ const dataRows = [
   { label: "Área Térrea (Loja)", value: "147,87 m²", highlight: false },
   { label: "Mezanino Elevado", value: "77,92 m²", highlight: false },
   { label: "Área Total Construída", value: "225,79 m²", highlight: true },
-  { label: "Penínsul / Esquina", value: "Sim (Esquina Dupla)", highlight: false },
-  { label: "Endereço", value: "São Francisco — Niterói/RJ", highlight: false },
+  { label: "Península / Esquina", value: "Sim (Esquina Dupla)", highlight: false },
+  { label: "Endereço", value: "Guaianazes, 46 — Niterói/RJ", highlight: false },
 ];
 
 const checkItems = [
   "Quadro de esquadrias em alumínio preto",
-  "Brises metálicos modulares",
-  "Acesso facilitado para clientes",
+  "Brises metálicos e amadeirados modulares",
+  "Ponto preparado para carregador veicular elétrico (EV)",
+  "Acesso facilitado para clientes e estacionamento privativo",
 ];
 
 const sectionVariants = {
@@ -42,7 +43,7 @@ export default function BlueprintViewer() {
 
   return (
     <>
-      <section id="plantas" className="py-24 md:py-36 bg-brand-sand text-brand-dark">
+      <section id="plantas" className="py-24 md:py-36 bg-brand-dark text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           {/* Section Header */}
           <motion.div
@@ -55,10 +56,10 @@ export default function BlueprintViewer() {
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold block mb-3">
               Engenharia &amp; Arquitetura
             </span>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.05] mb-6">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.05] text-white mb-6">
               O espaço, por dentro.
             </h2>
-            <p className="text-lg text-brand-muted font-light leading-relaxed">
+            <p className="text-lg text-gray-300 font-light leading-relaxed">
               Uma planta simples, objetiva e inteligente que organiza a experiência em dois níveis integrados, equilibrando área de exposição térrea e privacidade no mezanino.
             </p>
           </motion.div>
@@ -67,17 +68,18 @@ export default function BlueprintViewer() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             {/* Blueprint Technical Drawing */}
             <motion.div
-              className="lg:col-span-8 bg-brand-cream border border-brand-dark/15 p-4 md:p-6 rounded-sm shadow-xl relative group"
+              className="lg:col-span-8 bg-brand-darker border border-white/10 p-4 md:p-6 rounded-sm shadow-2xl relative group"
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm bg-white border border-brand-dark/10">
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm bg-white border border-white/20">
                 <Image
                   src="/assets/prancha/prancha-01.png"
                   alt="Prancha técnica com plantas baixas, cortes e fachadas do Projeto São Francisco"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 66vw"
                   className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 cursor-pointer"
                   onClick={() =>
                     handleOpenLightbox(
@@ -95,7 +97,7 @@ export default function BlueprintViewer() {
                     "Prancha Técnica com Implantação, Plantas Baixas, Cortes e Quadro de Esquadrias — Projeto São Francisco"
                   )
                 }
-                className="mt-4 flex items-center justify-center gap-2 w-full py-3 bg-brand-dark text-white hover:bg-brand-gold hover:text-brand-dark text-xs font-bold uppercase tracking-widest rounded-sm transition-colors"
+                className="mt-4 flex items-center justify-center gap-2 w-full py-3.5 bg-brand-gold text-brand-dark hover:bg-amber-400 text-xs font-bold uppercase tracking-widest rounded-sm transition-colors shadow-lg"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -106,13 +108,13 @@ export default function BlueprintViewer() {
 
             {/* Sidebar Details */}
             <motion.div
-              className="lg:col-span-4 bg-brand-cream border border-brand-dark/15 p-8 rounded-sm"
+              className="lg:col-span-4 bg-brand-darker border border-white/10 p-8 rounded-sm shadow-2xl"
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
             >
-              <h3 className="text-2xl font-light tracking-tight mb-6 pb-4 border-b border-brand-dark/15 flex items-center gap-2">
+              <h3 className="text-2xl font-light tracking-tight mb-6 pb-4 border-b border-white/10 flex items-center gap-2 text-white">
                 <FileText className="w-5 h-5 text-brand-gold" />
                 Leitura Técnica
               </h3>
@@ -122,14 +124,14 @@ export default function BlueprintViewer() {
                 {dataRows.map(({ label, value, highlight }, i) => (
                   <motion.div
                     key={label}
-                    className="flex justify-between items-center py-2.5 border-b border-brand-dark/10"
+                    className="flex justify-between items-center py-2.5 border-b border-white/10"
                     initial={{ opacity: 0, x: 10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 + 0.3, duration: 0.5 }}
                   >
-                    <span className="text-brand-muted">{label}</span>
-                    <strong className={`font-semibold text-base${highlight ? " text-brand-gold" : ""}`}>
+                    <span className="text-gray-400">{label}</span>
+                    <strong className={`font-semibold text-base ${highlight ? "text-brand-gold font-bold" : "text-white"}`}>
                       {value}
                     </strong>
                   </motion.div>
@@ -141,7 +143,7 @@ export default function BlueprintViewer() {
                 {checkItems.map((item, i) => (
                   <motion.div
                     key={item}
-                    className="flex items-center gap-2 text-xs text-brand-dark"
+                    className="flex items-center gap-2 text-xs text-gray-300"
                     initial={{ opacity: 0, x: 10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}

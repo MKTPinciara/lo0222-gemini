@@ -21,38 +21,29 @@ export default function Footer() {
         >
           {/* Brand Info */}
           <div className="md:col-span-5">
-            <div className="flex items-center gap-3.5 mb-4">
-              <div className="w-8 h-8 rounded-sm border border-brand-gold/40 flex items-center justify-center bg-brand-gold/10">
-                <Image
-                  src="/assets/brand/logo.svg"
-                  alt="Logo Pinciara Imóveis Exclusivos"
-                  width={24}
-                  height={24}
-                  className="w-6 h-6 object-contain"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-white">
-                  PROJETO SÃO FRANCISCO
-                </span>
-                <span className="text-[9px] uppercase tracking-[0.15em] text-brand-gold font-normal opacity-90">
-                  Pinciara Imóveis Exclusivos
-                </span>
-              </div>
+            <div className="mb-4">
+              <Image
+                src="/assets/brand/logo.svg"
+                alt="Pinciara Imóveis Exclusivos"
+                width={200}
+                height={50}
+                className="h-9 w-auto object-contain"
+              />
             </div>
-            <p className="text-xs font-light text-gray-400 max-w-md leading-relaxed">
-              Empreendimento comercial contemporâneo na esquina nobre de São Francisco, Niterói - RJ. Loja + Mezanino (~225m²).
+            <p className="text-xs font-light text-gray-400 max-w-md leading-relaxed mb-3">
+              Ponto comercial de alto padrão na esquina nobre de São Francisco (Rua Guaianazes, 46). Vão livre térreo de pé-direito duplo e mezanino integrado (~225,8 m²).
             </p>
+            <span className="text-[10px] uppercase tracking-widest text-brand-gold font-medium">
+              CRECI: CJ 7119
+            </span>
           </div>
 
           {/* Quick Links */}
           <div className="md:col-span-3 text-[11px] uppercase tracking-[0.18em] space-y-3">
             <span className="text-brand-gold font-semibold block mb-4">Navegação</span>
             {[
-              { href: "#projeto", label: "O Projeto" },
-              { href: "#showroom", label: "Showroom" },
+              { href: "#renders", label: "Fotos 3D" },
               { href: "#plantas", label: "Plantas Técnicas" },
-              { href: "#materiais", label: "Arquitetura" },
               { href: "#localizacao", label: "Localização" },
               { href: "#contato", label: "Contato" },
             ].map(({ href, label }) => (
@@ -80,7 +71,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0" />
-                <span>São Francisco — Niterói / RJ</span>
+                <span>Guaianazes, 46 — São Francisco / Niterói</span>
               </div>
             </div>
           </motion.div>

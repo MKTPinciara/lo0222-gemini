@@ -6,10 +6,8 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ArrowRight } from "lucide-react";
 
 const navLinks = [
-  { href: "#projeto", label: "O Projeto" },
-  { href: "#showroom", label: "Showroom" },
+  { href: "#renders", label: "Fotos 3D" },
   { href: "#plantas", label: "Plantas" },
-  { href: "#materiais", label: "Arquitetura" },
   { href: "#localizacao", label: "Localização" },
 ];
 
@@ -34,34 +32,34 @@ export default function HeaderNav() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
-        {/* Brand Logo & Title */}
+        {/* Brand Logo & Title with the new official monogram */}
         <motion.a
           href="#inicio"
-          className="flex items-center gap-3.5 group"
+          className="flex items-center gap-3 group"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <div className="relative w-8 h-8 flex items-center justify-center">
+          <div className="relative w-8 h-8 flex items-center justify-center shrink-0">
             <Image
-              src="/assets/brand/logo.svg"
+              src="/assets/brand/simbolo.svg"
               alt="Pinciara Imóveis Exclusivos"
-              width={28}
-              height={28}
+              width={32}
+              height={32}
               className="w-7 h-7 object-contain"
             />
           </div>
-          <div className="flex flex-col">
-            <span className="text-[11px] uppercase tracking-[0.25em] font-semibold text-white group-hover:text-brand-gold transition-colors">
-              SÃO FRANCISCO
+          <div className="flex flex-col border-l border-white/20 pl-3">
+            <span className="text-xs uppercase tracking-[0.22em] font-bold text-white group-hover:text-brand-gold transition-colors">
+              PINCIARA
             </span>
-            <span className="text-[9px] uppercase tracking-[0.15em] text-brand-gold font-normal opacity-90">
-              Pinciara Imóveis Exclusivos
+            <span className="text-[9px] uppercase tracking-[0.16em] text-brand-gold font-normal">
+              São Francisco · Niterói
             </span>
           </div>
         </motion.a>
 
-        {/* Desktop Navigation Links */}
+        {/* Clean Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-8 text-[11px] uppercase tracking-[0.18em] font-medium text-gray-300">
           {navLinks.map(({ href, label }, i) => (
             <motion.a

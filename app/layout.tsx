@@ -15,13 +15,33 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://saofrancisco-flagship.com.br"),
   title: "Projeto São Francisco — Flagship Showroom em Niterói | Pinciara Imóveis Exclusivos",
-  description: "Endereço comercial de alto padrão na esquina nobre de São Francisco, Niterói - RJ. Loja + Mezanino (~225m²). Ideal para marcas de móveis planejados, arquitetura e design.",
-  keywords: ["São Francisco Niterói", "Ponto Comercial Niterói", "Showroom Móveis Planejados", "Imóvel Comercial Alto Padrão", "Pinciara Imóveis Exclusivos", "Luiz Pinciara"],
+  description:
+    "Endereço comercial de alto padrão na esquina nobre de São Francisco, Niterói - RJ (Rua Guaianazes, 46). Loja + Mezanino (~225,8 m²). Ponto nobre para flagship store.",
+  keywords: [
+    "São Francisco Niterói",
+    "Ponto Comercial Niterói",
+    "Showroom Móveis Planejados",
+    "Imóvel Comercial Alto Padrão",
+    "Pinciara Imóveis Exclusivos",
+    "Luiz Pinciara",
+    "Guaianazes 46",
+  ],
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
-    title: "Projeto São Francisco — Flagship Showroom em Niterói",
-    description: "Espaço comercial de alto padrão com fachada contemporânea, brises de alumínio e pé-direito amplo na esquina de São Francisco.",
-    images: ["/assets/caderno/page-01.png"],
+    title: "Projeto São Francisco — Flagship Showroom em Niterói | Pinciara",
+    description:
+      "Espaço comercial de alto padrão com fachada contemporânea, brises de alumínio e pé-direito duplo na esquina nobre de São Francisco.",
+    images: ["/assets/renders/08-fachada-dramatica-golden-hour.jpg"],
     type: "website",
   },
 };
